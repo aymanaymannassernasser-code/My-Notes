@@ -77,13 +77,17 @@ fileSelector.addEventListener('change', () => {
     }
 });
 
-// 2. User clicks "Upload to Cloud"
+// 2. User clicks "Upload to Cloud" (v1.8.1 Patch)
 uploadBtn.addEventListener('click', async () => {
     const file = fileSelector.files[0];
     if (!file || !currentTopicId) return;
 
+    // --- THE FIX: Clean the file name ---
+    // Remove spaces and parentheses which cause "Invalid Key" errors in cloud storage
+    let safeFileName = file.name.replace(/\s+/g, '_').replace(/[()]/g, '');
+    
     // We store files in a folder named after the topic_id
-    const path = `${currentTopicId}/${file.name}`;
+    const path = `${currentTopicId}/${safeFileName}`;
     
     uploadBtn.innerText = "Uploading...";
     uploadBtn.disabled = true;
@@ -103,6 +107,7 @@ uploadBtn.addEventListener('click', async () => {
     }
     
     uploadBtn.innerText = "2. Upload to Cloud";
+    uploadBtn.disabled = false; // Re-enable for the next upload
 });
 
 // 3. App checks for files in the cloud
