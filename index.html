@@ -3,40 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knowledge Hub v1.7</title>
+    <title>Knowledge Hub v1.8</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <nav>
-        <h1>🧠 Knowledge Hub <span class="version">v1.7</span></h1>
+        <h1>🧠 Knowledge Hub <span class="version">v1.8</span></h1>
         <input type="text" id="searchBar" placeholder="Search knowledge...">
     </nav>
 
     <main id="app">
-        <aside id="categoryList"></aside>
+        <aside id="categoryList">
+            <div style="padding: 15px; color: #666;">Loading notes...</div>
+        </aside>
         
         <section id="noteDisplay">
             <div id="welcomeScreen">
-                <h2>Select a topic to sync files</h2>
+                <h2>Select a topic from the left to sync files</h2>
             </div>
             
             <article id="contentArea" class="hidden">
-                <button onclick="closeNote()">← Back</button>
-                <div id="noteContent"></div>
+                <button onclick="closeNote()" class="btn-ui">← Back to Welcome</button>
+                <div id="noteContent" style="margin-top: 20px;"></div>
 
                 <div class="vault-container">
-                    <h3>📁 Knowledge Vault</h3>
+                    <h3>📁 Knowledge Vault (Upload & Download)</h3>
+                    <p>Store your Excel calculators, PDF manuals, and Word docs here.</p>
+                    
                     <div class="upload-box">
                         <input type="file" id="fileSelector" hidden>
-                        <button class="btn-ui" onclick="document.getElementById('fileSelector').click()">Select File</button>
-                        <span id="selectedFileName">No file chosen</span>
-                        <button id="uploadBtn" class="btn-ui primary" disabled>Upload to Cloud</button>
+                        <button class="btn-ui" onclick="document.getElementById('fileSelector').click()">1. Select File</button>
+                        <span id="selectedFileName" style="margin: 0 10px;">No file chosen</span>
+                        <button id="uploadBtn" class="btn-ui primary" disabled>2. Upload to Cloud</button>
                     </div>
+
                     <div id="fileListContainer">
-                        <h4>Topic Files (Excel, PDF, Word):</h4>
-                        <ul id="fileList"></ul>
+                        <h4>Files available for this topic:</h4>
+                        <ul id="fileList">
+                            </ul>
                     </div>
                 </div>
             </article>
