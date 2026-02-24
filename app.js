@@ -1,6 +1,10 @@
 const SUPABASE_URL = 'https://xttgzogmvtamcmjkjwrt.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0dGd6b2dtdnRhbWNtamtqd3J0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4OTYyMDUsImV4cCI6MjA4NzQ3MjIwNX0.v3X2I5yhUJCwINanvO0ksXNwsbjypKiQxx8n-jBeRAQ';
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// Use a different name for the instance to avoid conflicting with the global 'supabase' object
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Then update all your calls from 'supabase' to 'supabaseClient'
+// Example: await supabaseClient.from('notes').select('*');
 
 let currentTopicId = null;
 
@@ -90,5 +94,6 @@ function closeNote() {
     document.getElementById('welcomeScreen').classList.remove('hidden');
     document.getElementById('contentArea').classList.add('hidden');
 }
+
 
 window.onload = init;
